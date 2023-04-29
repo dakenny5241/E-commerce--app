@@ -28,7 +28,12 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: [Category, Tag],
+    include: [Category, 
+      {
+        model: Tag,
+        through: ProductTag,
+      }],
+
   })
   // be sure to include its associated Category and Tag data
   .then((productData) => res.json(productData))
