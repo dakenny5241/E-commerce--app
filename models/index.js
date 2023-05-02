@@ -1,5 +1,7 @@
 // import models
 const Product = require('./Product');
+// import important parts of sequelize library
+const { Model, DataTypes } = require('sequelize');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
@@ -13,6 +15,7 @@ Product.belongsTo(Category, {
 // Categories have many Products
 Category.hasMany(Product, {
   foreignKey: 'category_id',
+  onDelete: 'CASCADE',
 });
 
 // Products belongToMany Tags (through ProductTag)
