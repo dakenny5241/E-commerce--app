@@ -11,15 +11,38 @@ router.get('/', (req, res) => {
       {
         model: Tag,
         through: ProductTag,
-      }],
-  })
+      },
+    ],
   // be sure to include its associated Category and Tag data
+  })
   .then((productData) => res.json(productData))
   .catch((err) => {
     console.log(err);
     res.status(500).json(err);
   })
 });
+
+router.get('/:id', (req, res) => {
+  // find a single product by its `id`
+  // be sure to include its associated Category and Tag data
+  Product.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [Category, 
+      {
+        model: Tag,
+        through: ProductTag,
+      },
+    ],
+  })
+  .then((productData) => res.json(productData))
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  })
+})
+
 // get all products
 router.get('/', (req, res) => {
   // find all products

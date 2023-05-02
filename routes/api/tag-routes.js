@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     include: [Product],
   })
   // be sure to include its associated Product data
-  .then((tagData) => res.json(tagData))
+  .then((TagData) => res.json(TagData))
   .catch((err) => {
     console.log(err);
     res.status(500).json(err);
@@ -31,7 +31,6 @@ router.get('/:id', (req, res) => {
     res.status(500).json(err);
   })
 });
-
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create(req.body)
